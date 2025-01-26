@@ -1,0 +1,127 @@
+<html>
+
+<head>
+    <!-- required from semantic ui -->
+    <link rel='stylesheet' href="{{ url_for ('static', filename='semantic.min.css') }}">
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="{{ url_for ('static', filename='semantic.min.js') }}"></script>
+    <style>
+        /* 
+            Flex container that holds the child blocks (Welcome and Login) in a vertical column   
+            */
+
+        .LogInScreen {
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            background-image: url({{ url_for('static', filename='back.jpg')
+            }});
+
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 100%;
+            width: 100%;
+        }
+
+        /* Header */
+
+        .Welcome {
+            align-self: center;
+            background-origin: content-box;
+            height: 50px;
+            width: 800px;
+        }
+
+        /* Title */
+
+        #title {
+            text-align: center;
+            background-color: black;
+            color: bisque;
+            border-radius: 30px;
+            background: linear-gradient(to right,
+                    rgba(0, 0, 0, 0) 0%,
+                    rgba(0, 0, 0, 1) 15%,
+                    rgba(0, 0, 0, 1) 25%,
+                    rgba(0, 0, 0, 1) 25%,
+                    rgba(0, 0, 0, 1) 35%,
+                    rgba(0, 0, 0, 1) 35%,
+                    rgba(0, 0, 0, 1) 50%,
+                    rgba(0, 0, 0, 1) 65%,
+                    rgba(0, 0, 0, 1) 65%,
+                    rgba(0, 0, 0, 1) 75%,
+                    rgba(0, 0, 0, 1) 75%,
+                    rgba(0, 0, 0, 1) 85%,
+                    rgba(0, 0, 0, 0) 100%);
+
+        }
+
+        /* Form */
+
+        .LogIn {
+            align-self: center;
+            padding-top: 70px;
+        }
+
+        /* container of form */
+
+        #InfoInput {
+            padding: 5px 30px 30px 30px;
+            align-self: center;
+            border-radius: 20px;
+            height: 300px;
+            width: 500px;
+            background-color: rgb(164, 164, 219);
+            opacity: 0.9;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="LogInScreen">
+
+        <!-- Title of the Game   -->
+        <div class="Welcome">
+            <h1 id="title">~Welcome to The Snake Game~</h1>
+        </div>
+
+        <!--  container of the login form  -->
+        <div class="LogIn">
+            <div id=InfoInput>
+                <br>
+                <!--  uses a form tag with the method "post", which appends form-data inside the body
+                  of the HTTP request (data is not shown in URL) so that it can then be taken and
+                  used by python
+                -->
+                <form class="ui form" action="" method="post">
+                    <div class="field">
+                        <label>Username (email)</label>
+                        <input type="text" name="username" placeholder="Type to enter">
+                    </div>
+                    <br>
+                    <div class="field">
+                        <label>Password</label>
+                        <input type="text" name="password" placeholder="Type to enter">
+                    </div>
+                    <br>
+
+                    <button class="ui button" type="submit">Submit</button>
+                </form>
+            </div>
+            <!--    uses if statement from the template to show 
+                        the error message if user isn't found    
+            -->
+            {% if valid == True %}
+            <div class="ui negative message">
+                <div class="header">Error</div>
+                <p>Wrong credentials</p>
+            </div>
+            {% endif %}
+        </div>
+
+    </div>
+</body>
+
+</html>
+
